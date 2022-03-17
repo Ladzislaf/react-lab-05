@@ -1,24 +1,40 @@
-.form {
+form {
 	text-align: center;
-	font-size: 30px;
+	font-size: 20px;
 	font-family: 'Roboto', sans serif;
+	background: rgba(70, 199, 66, 0.37);
+	width: 400px;
+	margin: auto;
+	padding: 10px 0px 30px 0px;
+	border-radius: 5px;
+}
+
+h2 {
+	color: rgba(6, 148, 1, 0.678);
 }
 
 .inputPlaceholder {
 	display: flex;
     justify-content: center;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     flex-direction: column;
     /*border: 2px solid;*/
 }
 
-.emailInput, .phoneInput, .passInput {
-	font-size: 40px;
+.input {
+	font-size: 25px;
 	border: 2px solid #79e879;
 	border-radius: 8px;
 	color: rgba(63,108,55,0.83);
-	width: 500px;
-	margin: auto;
+	width: 300px;
+	margin: 3px auto;
+}
+
+.sel {
+	font-family: 'Roboto', sans serif;
+	background: rgba(9, 255, 0, 0.377);
+	font-size: 20px;
+	border-radius: 2px;
 }
 
 /* Email */
@@ -37,9 +53,14 @@ p {
 
 /* PassInput */
 
-.passInput {
-	
+.match {
+	color:green;
 }
 
-/* PhoneInput */
+.no_match {
+	color:red;
+}
 
+.inputPlaceholder progress {
+	align-self: center;
+}

@@ -2,7 +2,7 @@ import React from 'react'
 import {useState} from 'react'
 
 const SignUpEmailInput = () => {
-	const [state, setState] = useState('input correct email')
+	const [state, setState] = useState('')
 	const [pClass, setPClass] = useState('incorrect')
 
 	const onEmailInput = (e) => {
@@ -10,12 +10,14 @@ const SignUpEmailInput = () => {
 	
 		if (input.value.match(/.@.+\..+/i)) { setState('correct'); setPClass('correct') }
 		else { setState('input correct email'); setPClass('incorrect') }
+
+		if(input.value === '') setState('')
 	}
 
 	return (
 		<div className='inputPlaceholder'>
 			<input
-				className='emailInput'
+				className='input'
 				type='text'
 				placeholder='Email'
 				onInput={onEmailInput}

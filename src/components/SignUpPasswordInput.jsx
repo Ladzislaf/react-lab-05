@@ -2,47 +2,63 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 
 const SignUpPasswordInput = () => {
-	const [state, setState] = useState('check pass')
-	const [pClass, setPClass] = useState('incorrect')
-	const [security, setSecurity] = useState('low')
-	const [match, setMatch] = useState('match')
+	const [match, setMatch] = useState({ style: '', value: '' })
 	const [passValues, setPassValues] = useState({ first: '', second: '' })
+	const [security, setSecurity] = useState({ text: '', value: 1 })
 
 	const onPass1Input = (e) => {
 		setPassValues({ first: e.target.value, second: passValues.second })
 	}
 
-	// выходила на берег катюша
-	
 	const onPass2Input = (e) => {
 		setPassValues({ first: passValues.first, second: e.target.value })
 	}
 
 	useEffect(() => {
-		if (passValues.first === passValues.second) setMatch('match')
-		else setMatch('no match')
-		console.log(passValues)
+		if(passValues.first === '') setMatch({ style: '', value: '' })
+		else
+		if (passValues.first === passValues.second) setMatch({ style: 'match', value: 'match' })
+		else setMatch({ style: 'no_match', value: 'no match' })
+
+		let protectionLevel = 0, text = ''
+
+		if(passValues.first.match(/\d/)) protectionLevel++
+		if(passValues.first.match(/[a-z]/)) protectionLevel++
+		if(passValues.first.match(/[A-Z]/)) protectionLevel++
+		if(passValues.first.match(/[@!~#$%^&*()\-_=+'':";;?<>/\\]/)) protectionLevel++
+
+		switch(protectionLevel) {
+			case 1: text = 'protection level: low'
+				break
+			case 2: text = 'protection level: normal'
+				break
+			case 3: text = 'protection level: high'
+				break
+			case 4: text = 'protection level: ultra high'
+				break
+			default:
+		}
+
+		setSecurity({ text: text, value: protectionLevel })
 	}, [passValues])
 
 	return (
 		<div className='inputPlaceholder'>
 			<input
-				className='passInput'
+				className='input'
 				type='Password'
 				placeholder='password'
 				onChange={onPass1Input}
 			/>
-			<br />
 			<input
-				className='passInput'
+				className='input'
 				type='Password'
 				placeholder='confirm password'
 				onChange={onPass2Input}
 			/>
-			<p className={pClass}>{match}</p>
-			<p>security: {security}</p>
-			<p>{passValues.first}</p>
-			<p>{passValues.second}</p>
+			<p className={match.style}>{match.value}</p>
+			<p>{security.text}</p>
+			<progress max='4' value={security.value}></progress>
 		</div>
 	)
 }

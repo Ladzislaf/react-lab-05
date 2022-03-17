@@ -9,7 +9,7 @@ const PhoneInput = () => {
 
     return (
         <div className="inputPlaceholder">
-            <input className="phoneInput" list="t" type="tel" placeholder="Phone number" onInput={onPhoneInput}
+            <input className="input" list="t" type="tel" placeholder="Phone number" onInput={onPhoneInput}
                    onChange={checkCountry}/>
             <datalist id="t">
                 <option value="+375"/>
