@@ -42,6 +42,7 @@ const SignUpForm = () => {
 		<select className={'sel'}>{allMonths}</select>
 		<select className={'sel'}>{allYears}</select>
 		<PhoneInput/>
+		<input type="submit" className={'send'} value="send"/>
 	</form>
   )
 }
