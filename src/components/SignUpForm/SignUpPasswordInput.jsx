@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 
-const SignUpPasswordInput = () => {
+const SignUpPasswordInput = ({sendButtonState, setSendButtonState}) => {
 	const [match, setMatch] = useState({ style: '', value: '' })
 	const [passValues, setPassValues] = useState({ first: '', second: '' })
 	const [security, setSecurity] = useState({ text: '', value: 1 })
@@ -15,6 +15,13 @@ const SignUpPasswordInput = () => {
 	}
 
 	useEffect(() => {
+		if(match.value === 'match')
+			setSendButtonState({...sendButtonState, pass: true})
+		else
+			setSendButtonState({...sendButtonState, pass: false})
+	}, [match])
+
+	useEffect(() => {
 		if(passValues.first === '') setMatch({ style: '', value: '' })
 		else
 		if (passValues.first === passValues.second) setMatch({ style: 'match', value: 'match' })
@@ -25,7 +32,7 @@ const SignUpPasswordInput = () => {
 		if(passValues.first.match(/\d/)) protectionLevel++
 		if(passValues.first.match(/[a-z]/)) protectionLevel++
 		if(passValues.first.match(/[A-Z]/)) protectionLevel++
-		if(passValues.first.match(/[@!~#$%^&*()\-_=+'':";;?<>/\\]/)) protectionLevel++
+		if(passValues.first.match(/[@!~#$%^&*()\-_=+':";?<>/\\]/)) protectionLevel++
 
 		switch(protectionLevel) {
 			case 1: text = 'protection level: low'
